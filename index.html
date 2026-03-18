@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emma & David — Mallorca, 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #faf7f2;
+      --warm:     #f2ebe0;
+      --stone:    #c8b9a5;
+      --terracotta: #b5714a;
+      --earth:    #7a5c44;
+      --deep:     #2e2318;
+      --gold:     #c9a96e;
+      --text:     #3d2e20;
+      --muted:    #8c7b6b;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(181,113,74,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 90%, rgba(201,169,110,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 50% at 50% 50%, rgba(200,185,165,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 80px;
+    }
+
+    .rule {
+      width: 1px;
+      height: 64px;
+      background: linear-gradient(to bottom, transparent, var(--stone));
+      margin-bottom: 36px;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .locale {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 20px;
+      animation: fadeUp 1.2s 0.1s ease both;
+    }
+
+    .names {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(52px, 10vw, 88px);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      text-align: center;
+      color: var(--deep);
+      animation: fadeUp 1.2s 0.2s ease both;
+    }
+
+    .names em {
+      font-style: italic;
+      color: var(--earth);
+    }
+
+    .amp {
+      display: block;
+      font-style: italic;
+      font-size: 0.75em;
+      color: var(--gold);
+      line-height: 1.1;
+    }
+
+    .date {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 24px;
+      animation: fadeUp 1.2s 0.3s ease both;
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 44px 0;
+      animation: fadeUp 1.2s 0.4s ease both;
+    }
+
+    .ornament-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--stone));
+    }
+
+    .ornament-line.right {
+      background: linear-gradient(to left, transparent, var(--stone));
+    }
+
+    .ornament-diamond {
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(17px, 3vw, 21px);
+      line-height: 1.65;
+      text-align: center;
+      color: var(--earth);
+      max-width: 440px;
+      animation: fadeUp 1.2s 0.45s ease both;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 380px;
+      margin-top: 48px;
+      animation: fadeUp 1.2s 0.55s ease both;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 26px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(200,185,165,0.5);
+      border-radius: 4px;
+      text-decoration: none;
+      color: inherit;
+      backdrop-filter: blur(8px);
+      transition: all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,169,110,0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(46,35,24,0.1);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--warm);
+      border: 1px solid var(--stone);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.35s ease;
+    }
+
+    .card:hover .card-icon {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    .card-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--earth);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.35s ease;
+    }
+
+    .card:hover .card-icon svg { stroke: white; }
+
+    .card-text { flex: 1; }
+
+    .card-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--deep);
+      line-height: 1.2;
+    }
+
+    .card-password {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .card-password span {
+      font-weight: 400;
+      color: var(--terracotta);
+      letter-spacing: 0.08em;
+    }
+
+    .card-arrow {
+      flex-shrink: 0;
+      color: var(--stone);
+      font-size: 18px;
+      transition: all 0.35s ease;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .card:hover .card-arrow {
+      color: var(--gold);
+      transform: translateX(3px);
+    }
+
+    .bottom {
+      margin-top: 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      animation: fadeUp 1.2s 0.65s ease both;
+    }
+
+    .bottom-rule {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--stone), transparent);
+    }
+
+    .bottom-text {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .cards { max-width: 100%; }
+      .tagline { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="rule"></div>
+
+    <p class="locale">Mallorca, Spain</p>
+
+    <h1 class="names">
+      Emma
+      <span class="amp">&amp;</span>
+      <em>David</em>
+    </h1>
+
+    <p class="date">Summer 2025</p>
+
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-diamond" style="opacity:0.4;margin:0 -10px"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line right"></div>
+    </div>
+
+    <p class="tagline">We've been reliving every moment. We hope you love it as much as we do.</p>
+
+    <div class="cards">
+
+      <a class="card" href="https://www.youtube.com/watch?v=o6oFO0q0TUs" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <polygon points="5,3 19,12 5,21"/>
+          </svg>
+        </div>
+        <div class="card-text">
+          <div class="card-label">Watch</div>
+          <div class="card-title">The Wedding Film</div>
+        </div>
+        <div class="card-arrow">→</div>
+      </a>
+
+      <a class="card" href="https://chrisandruth.pixieset.com/guestlogin/emmaanddavid/?return=%2Femmaanddavid%2F" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+        </div>
+        <div class="card-text">
+          <div class="card-label">Browse</div>
+          <div class="card-title">The Photo Album</div>
+          <div class="card-password">Password: <span>ollie</span></div>
+        </div>
+        <div class="card-arrow">→</div>
+      </a>
+
+    </div>
+
+    <div class="bottom">
+      <div class="bottom-rule"></div>
+      <p class="bottom-text">¡Moltes gràcies!</p>
+    </div>
+
+  </div>
+</body>
+</html>
